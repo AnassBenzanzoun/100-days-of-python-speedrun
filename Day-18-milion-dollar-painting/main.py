@@ -1,5 +1,14 @@
 from turtle import *
 import random
+import colorgram
+
+color_list = []
+colors = colorgram.extract("hirst-painting.jpg", 30)
+for color in colors:
+    r = color.rgb.r
+    g = color.rgb.g
+    b = color.rgb.b
+    color_list.append((r, g, b))
 
 speed("fastest")
 colormode(255)
@@ -44,6 +53,7 @@ def random_walk():
 
 def spilograph(size_of_gap):
     tam = Turtle()
+    tam.speed("fastest")
     for i in range(int(360 / size_of_gap)):
         tam.color(random_color())
         tam.circle(100)
@@ -56,33 +66,12 @@ def spilograph(size_of_gap):
 # spilograph(5)
 
 
-def milion_dollar_painting():
+def milion_dollar_painting(color_list):
     hirst = Turtle()
     hirst.speed("fastest")
     hirst.penup()
     hirst.hideturtle()
-    color_list = [
-        (245, 243, 238),
-        (246, 242, 244),
-        (240, 245, 241),
-        (237, 241, 245),
-        (244, 240, 245),
-        (240, 245, 243),
-        (244, 240, 240),
-        (240, 244, 240),
-        (243, 240, 244),
-        (240, 240, 244),
-        (244, 240, 243),
-        (236, 244, 240),
-        (240, 240, 240),
-        (240, 236, 244),
-        (240, 240, 236),
-        (240, 236, 240),
-        (236, 240, 240),
-        (236, 240, 236),
-        (240, 236, 236),
-        (236, 236, 240),
-    ]
+
     hirst.setheading(225)
     hirst.forward(300)
     hirst.setheading(0)
@@ -100,6 +89,24 @@ def milion_dollar_painting():
             hirst.setheading(0)
 
 
-milion_dollar_painting()
+def connect_dots(color_list):
+    dotty = Turtle()
+    dotty.speed("fastest")
+
+    dotty.setheading(225)
+    dotty.forward(300)
+    dotty.setheading(0)
+
+    directions = [0, 90, 180, 270]
+    dotty.width(10)
+    for i in range(4):
+        dotty.color(random.choice(color_list))
+        dotty.setheading(directions[i])
+        forward(450)
+
+
+milion_dollar_painting(color_list)
+# connect_dots(color_list)
+# spilograph(1)
 screen = Screen()
 screen.exitonclick()
